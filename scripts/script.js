@@ -1,4 +1,5 @@
-var chanceVal = 50, bet = 1, myHash="ADEFA3A646CDAF1D7A51626997EF74DE34CA17124A3F51244ECAA1969C478281", clientHash="CEB25E042BB9623CD4709A8E2BFBA51F26B523C42712A3EE899BEC2CDBC39D95";
+var betsizeElem, payoutElem, winChanceElem, winAmountElem, betsize, payout, over, under; 
+const edge = 0.01;
 
 function performHTTPRequest(method, url, data, callback) {
     var shouldBeAsync = true;
@@ -12,6 +13,23 @@ function performHTTPRequest(method, url, data, callback) {
 
     request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     request.send(data);
+}
+
+function connectWebSocket() {
+    var socket = new WebSocket("ws://localhost:31416");
+    
+    socket.onopen = function() {
+        console.log("hi");
+        socket.send("hi");
+    }
+}
+
+function roundToTwoDp(num) {
+    return Math.round(num*100) / 100;
+}
+
+function roundToSixDp(num) {
+    return Math.round(num*1000000) / 1000000;
 }
 
 function openTab(evt, tabname) {
@@ -31,65 +49,62 @@ function openTab(evt, tabname) {
     evt.currentTarget.className += " active";
 }
 
-function roll() {
-    var sum = (parseInt(myHash.substr(0,4), 16)) + (parseInt(clientHash.substr(0, 4), 16)),
-        roll = sum%100+1;
-    console.log(sum + " and " + roll);
+function multiplyProfit(num) {
+    var val = payoutElem.value * parseFloat(num);
+    if (val < 1.02) return;
+    profit.value = val;
 }
 
-window.onload = function(e) {    
-    
-    var chance = document.getElementById("chance"),
-        rollUnder = document.getElementById("number-display"),
-        wager = document.getElementById("wager"),
-        profit = document.getElementById("profit"),
-        username = document.getElementById("username"),
-        balance = document.getElementById("balance");
-    
-    if (document.cookie != null) {
-        
-    } else {
-        username.innerHTML = "Sign In";
-        balance.parentNode.removeChild(balance);
-    }
-    
+function update() {
+    var theoreticalChance = roundToTwoDp(1/payout),
+        chance = theoreticalChance * (1-edge),
+        chancePercent = chance*100;
+    winChanceElem.value = chancePercent;
+    winAmountElem.value = roundToSixDp(betsize*payout);
+    under.innerHTML = chancePercent;
+    over.innerHTML = 99.99-chancePercent;    
+}
+
+window.onload = function(e) {       
     document.getElementById("play").style.display = "block";
     document.getElementById("default").className += " active";
     
-    document.getElementById("range").oninput = function() {
-        chanceVal = parseFloat(this.value);
-        chance.innerHTML = chanceVal + "%";
-        rollUnder.innerHTML = (chanceVal+0.1).toFixed(2);
-        var noHouseEdge = bet/(chanceVal/100) - bet,
-            houseEdge = noHouseEdge * 0.988;
-        profit.innerHTML = houseEdge.toFixed(10);
-        wager.innerHTML = bet.toFixed(10);
-    }
+    betsizeElem = document.getElementById("betsize");
+    payoutElem = document.getElementById("payout");
+    winChanceElem = document.getElementById("winChance");
+    winAmountElem = document.getElementById("winAmount");    
+    over = document.getElementById("over");
+    under = document.getElementById("under");
     
-    document.getElementById("bet").onchange = function() {
-        var DOM = document.getElementById("bet");
-        console.log(this.value);
-        bet = parseFloat(this.value);
-        DOM.setAttribute("value", bet.toFixed(8));
-        var noHouseEdge = bet/(chanceVal/100) - bet,
-            houseEdge = noHouseEdge * 0.99;
-        profit.innerHTML = houseEdge.toFixed(10);
-        wager.innerHTML = bet.toFixed(10);
-    }
+    console.log(payoutElem.value);
+    
+    betsizeElem.addEventListener("change", function(event) {
+        betsize = betsizeElem.value;
+        update();
+    });
+    
+    payoutElem.addEventListener("change", function(event) {
+        payout = payoutElem.value;
+        update();
+    });
+    
+    betsize = 0.0001;
+    payout = 2;
 }
 
-function connectWebSocket() {
-    var socket = new WebSocket("ws://localhost:31416");
-    
-    socket.onopen = function() {
-        console.log("hi");
-        socket.send("hi");
-    }
+function multiplyBet(num) {
+    var val = betsize.value * parseFloat(num);
+    if (val < 0.0001) return;
+    betsize.value = val;
+}
+
+function setMaxOrMin(max) {
+    if (max) betsize.value = 5;
+    else betsize.value = 0.00001;
 }
 
 function fetchInformation() {
     var cookie = document.cookie;
-    console.log(cookie);
     if (cookie != null && cookie != "null") { // they're signed in
         performHTTPRequest("GET", "http://localhost:81/api/users/fetchInformation", "", function(response) {
             if (response != "-1" && response != "-2") {

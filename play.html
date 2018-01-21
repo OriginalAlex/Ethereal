@@ -24,55 +24,100 @@
             </div>
         </div>
         <div id="main-content">
-            <div id="simple">
-                <div id="fair">Our Ethereum Dice Game is <a href="#">provably fair</a>. We have a low house edge of 1%.</div>
-                <div id="description">Ethereal is a <i>provably fair</i> dice game requiring no identity verification<br>or other similar nuisances</div>
-            </div>
-            <div class="tab">
-                <div class="playing-tab">
-                    <button class="tablinks" onclick="openTab(event, 'play')" id="default">Play</button>
-                    <button class="tablinks" onclick="openTab(event, 'outcomes')">Outcomes</button>
-                    <button class="tablinks" onclick="openTab(event, 'instructions')">How to Play</button>
-                    <button class="tablinks" onclick="openTab(event, 'support')">Support</button>
-                    <button class="tablinks" onclick="openTab(event, 'tandc')">Terms</button>
+            <div class="center">
+                <div id="simple">
+                    <div id="fair">Our Ethereum Dice Game is <a href="#">provably fair</a>. We have a low house edge of 1%.</div>
+                    <div id="description">Ethereal is a <i>provably fair</i> dice game requiring no identity verification<br>or other similar nuisances</div>
                 </div>
-                <div id="play" class="tabcontent">
-                    <div id="bet-content">
-                        <div id="place-bets" class="part gap">
-                            <h4>Place your bets please</h4>
-                            <h5 class="instructions" id="betsize">1. Set bet size</h5>
-                            <input type="number" value="1" step="0.01" id="bet">
-                            <h5 class="instructions">2. Adjust your chance to win</h5>
-                            <div id="slide-container">
-                                <input type="range" min="1" max="97" value="50" id="range" class="slider" step="0.1">
+            </div>
+            <div class="left">
+                <div class="tab">
+                    <div class="playing-tab">
+                        <button class="tablinks" onclick="openTab(event, 'play')" id="default">Play</button>
+                        <button class="tablinks" onclick="openTab(event, 'outcomes')">Auto Bet</button>
+                        <button class="tablinks" onclick="openTab(event, 'instructions')">How to Play</button>
+                    </div>
+                    <div id="play" class="tabcontent">
+                        <div id="bet-content">
+                            <div class="left">
+                                <div id="size">
+                                    <h4>BET SIZE</h4>
+                                    <div class="top">
+                                        <div class="row">
+                                            <div class="col" onclick="setMaxOrMin(false)">MIN</div>
+                                            <div class="col" onclick="multiplyBet(0.5)">1/2</div>
+                                            <div class="col" onclick="multiplyBet(2)">2X</div>
+                                            <div class="col" onclick="setMaxOrMin(true)">MAX</div>
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <input class="numberBox" id="betsize" type="number" value="0.00010" step="0.0001"
+                                        ><div class="simple-box">PLAY</div>
+                                    </div>
+                                </div>
                             </div>
-                            <h5 class="instructions">Win chance: <span id="chance">50%</span></h5>
+                            <div class="right">
+                                <h4>PROFIT ON WIN</h4>
+                                <div id="profit">
+                                    <div class="top">
+                                        <div class="row">
+                                            <div class="col" onclick="setMaxOrMin(false)">MIN</div>
+                                            <div class="col" onclick="multiplyProfit(0.5)">1/2</div>
+                                            <div class="col" onclick="multiplyProfit(2)">2X</div>
+                                            <div class="col" onclick="setMaxOrMin(true)">MAX</div>
+                                        </div>
+                                    </div>
+                                    <div class="bottom">
+                                        <input class="numberBox" id="payout" type="number" value="2" step="1"
+                                        ><div class="simple-box">X</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                            <div id="spacefiller"></div>
+                            <div id="info">
+                                <div class="left">
+                                    <div id="size">
+                                        <h4>Payout</h4>
+                                        <div class="bottom">
+                                            <input class="numberBox" id="winAmount" type="number" value="0.00020"disabled
+                                            ><div class="simple-box">PLAY</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <h4>Win Chance</h4>
+                                    <div id="profit">
+                                        <div class="bottom">
+                                            <input class="numberBox" id="winChance" type="number" value="49.50" step="1" disabled
+                                            ><div class="simple-box">%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                      
                         </div>
-                        <div id="bet-info" class="part gap">
-                            <h4>Bet Slip</h4>
-                            <h5 class="instructions">Roll under</h5>
-                            <div id="number-display"><p id="actual-display">51</p></div>
-                            <h5 class="instructions">for a profit of</h5>
-                            <div class="simple-box" id="profit">0.99000000000</div>
-                            <h5 class="instructions">wager:</h5>
-                            <div class="simple-box" id="wager">1.0000000000</div>
-                        </div>
-                        <div id="result" class="part">
-                            <button id="roll" onclick="roll()">Roll!</button>
+                        <div class="clear"></div>
+                        <div id="spacefiller2"></div>
+                        <div id="rollContainer">
+                            <button id="rollUnder" class="left">ROLL UNDER<br><span id="under">49.5</span></button>
+                            <button id="rollOver" class="right">ROLL OVER<br><span id="over">50.49</span></button>
+                            <div class="clear"></div>
                         </div>
                     </div>
+                    <div id="outcomes" class="tabcontent">
+                        <h3>Outcomes</h3>
+                    </div>
+                    <div id="instructions" class="tabcontent">
+                        <h3>How to Play</h3>
+                    </div>
+                    <div id="support" class="tabcontent">
+                        <h3>How to Play</h3>
+                    </div>
+                    <div id="tandc" class="tabcontent">
+                        <h3>How to Play</h3>
+                    </div>
                 </div>
-                <div id="outcomes" class="tabcontent">
-                    <h3>Outcomes</h3>
-                </div>
-                <div id="instructions" class="tabcontent">
-                    <h3>How to Play</h3>
-                </div>
-                <div id="support" class="tabcontent">
-                    <h3>How to Play</h3>
-                </div>
-                <div id="tandc" class="tabcontent">
-                    <h3>How to Play</h3>
+                <div class="right">
                 </div>
             </div>
         </div>

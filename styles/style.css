@@ -20,6 +20,12 @@ body {
     overflow: hidden;
 }
 
+.center {
+    width: 50vw;
+    margin-left: 25vw;
+    margin-right: 25vw;
+}
+
 .left {
     float: left;
 }
@@ -55,13 +61,12 @@ body {
     margin-top: 5vh;
     text-align: center;
     font-family: 'Roboto';
-    background-color: deepskyblue; 
+    background-color: inherit; 
 }
 
 #main-content {
-    margin-left: 15vw;
-    margin-right: 15vw;
-    width: 70vw;
+    width: 50vw;
+    margin-left: 3vw;
 }
 
 #simple a, #simple a:hover, #simple a:visited {
@@ -81,7 +86,6 @@ body {
 }
 
 .playing-tab {
-    padding-top: 3vh;
     overflow: hidden;
 }
 
@@ -122,9 +126,10 @@ body {
 .tabcontent {
     display: none;
     border: 1px solid lightgreen;
-    background-color: deepskyblue;
-    padding: 1vh 1vw 1vh 1vw;
+    background-color: #4dd2ff;
+    padding: 1vh 1vw 1.5vh 1vw;
     overflow: hidden;
+    width: 43vw;
 }
 
 .instructions {
@@ -135,28 +140,118 @@ body {
     margin-top: 3vh;
 }
 
-#play h4 {
+h4 {
     margin: 0;
-    font-size: 25px;
+    font-size: 23px;
     margin-bottom: 0.7vh;
-    color: pink;
+    color: white;
 }
 
 #play {
     text-align: center;
 }
 
-
-#play input[type=number] {
-    background-color: inherit;
-    border-radius: 16px;
+.numberBox {
+    background-color: #67ECFF;
     border-color: #77D577;
-    padding-top: 0.5vh;
-    padding-bottom: 0.5vh;
-    text-align: center;
-    width: 40%;
-    color: #ff4000;
+    padding-top: 1.3vh;
+    padding-bottom: 1.3vh;
+    padding-right: 1.6vw;
+    text-align: right;
+    color: floralwhite;
     font-size: 20px;
+    border: 1px solid #ff7a4d;
+    display: inline-block;
+}
+
+.clear {
+    clear: both;
+}
+
+/*
+I need:
+BetID, Better username, amount, payout, expected profit, roll, result (+/- expected profit)
+*/
+
+.simple-box {
+    padding: 1.3vh 0.7vw 1.3vh 1vw;
+    display: inline-block;
+    text-align: right;
+    color: floralwhite;
+    font-size: 20px;
+    background-color: deepskyblue;
+    border: 1px solid #ff7a4d;
+}
+
+#info input {
+    background-color: #00bfff;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.row {
+    background-color:#00A6E6;
+    margin: 0;
+}
+
+.col {
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+    padding-top: 1.3vh;
+    padding-bottom: 1.3vh;
+    margin: 0;
+    width: 24%;
+    cursor: pointer;
+}
+
+.col:hover {
+    background-color: #ff7a4d;
+}
+
+#spacefiller {
+    height: 4vh;
+}
+
+#spacefiller2 {
+    height: 2.4vh;
+    background-color: inherit;
+}
+
+#rollContainer {
+    width: 45vw;
+    background-color: #4dd2ff;
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+}
+
+#rollContainer button {
+    background-color: #00A6E6;
+    border: 0;
+    color: floralwhite;
+    font-family: "Roboto";
+    font-size: 18px;
+    padding: 1.2vh 0.8vw 1vh 0.8vw;
+}
+
+#rollContainer button:hover {
+    background-color: #ff7a4d;
+    cursor: pointer;
+}
+
+#rollUnder {
+    margin-left: 11.2vw;
+}
+
+#rollOver {
+    margin-right: 12.8vw;
 }
 
 .part {
@@ -169,23 +264,6 @@ body {
     height: 30vh;
 }
 
-@media screen and (min-width: 1100px) {
-    .part {
-        width: 31.5%;
-    }
-    .gap {
-        margin-right: 2%;
-    }
-}
-
-@media screen and (max-width: 1099px) {
-    .part {
-        width: 100%;
-    }
-}
-
-
-
 .part h4 {
     margin-top: 2vh;
 }
@@ -194,77 +272,12 @@ body {
     margin-top: 2vh;
 }
 
-#number-display {
-    width: 70%;
-    height: 5vh;
-    border-radius: 16px;
-    margin-left: 50%;
-    transform: translateX(-50%);
-    border: 1px solid lightgreen;
-    color: #ff4000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
+#bet-content {
+    padding: 1vh 1vw 1vh 1vw;
 }
 
-.simple-box {
-    height: 3vh;
-    width: 70%;
-    border-radius: 16px;
-    border: 1px solid lightgreen;
-    color: #ff4000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 50%;
-    transform: translateX(-50%);
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
-
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
-}
-
-.slidecontainer {
-    width: 100%; /* Width of the outside container */
-}
-
-/* The slider itself */
-.slider {
-    -webkit-appearance: none;  /* Override default CSS styles */
-    appearance: none;
-    width: 50%; /* Full-width */
-    background: #77D577; /* Grey background */
-    height: 15px;
-    border-radius: 5px;   
-    outline: none; /* Remove outline */
-    opacity: 0.9; /* Set transparency (for mouse-over effects on hover) */
-    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-    transition: opacity .2s;
-}
-
-/* Mouse-over effects */
-.slider:hover {
-    opacity: 1; /* Fully shown on mouse-over */
-}
-
-/* The slider handle (use webkit (Chrome, Opera, Safari, Edge) and moz (Firefox) to override default look) */ 
-.slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
-    appearance: none;
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px;
-    border-radius: 50%; 
-    background-color: whitesmoke; /* Green background */
-    cursor: pointer; /* Cursor on hover */
-}
-
-.slider::-moz-range-thumb {
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
-    background: #4CAF50; /* Green background */
-    cursor: pointer; /* Cursor on hover */
-}
+ 
