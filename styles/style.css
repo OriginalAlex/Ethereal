@@ -65,13 +65,17 @@ body {
 }
 
 #main-content {
-    width: 50vw;
     margin-left: 3vw;
+    margin-right: 3vw;
 }
 
 #simple a, #simple a:hover, #simple a:visited {
     text-decoration: none;
     color: inherit;
+}
+
+#real-content {
+    margin-top: 3vh;
 }
 
 #fair {
@@ -85,12 +89,12 @@ body {
     color: 	#00ff00;
 }
 
-.playing-tab {
+.tab {
     overflow: hidden;
 }
 
 /* Style the buttons that are used to open the tab content */
-.playing-tab button {
+.tab button {
     float: left;
     border: none;
     outline: none;
@@ -106,12 +110,12 @@ body {
 }
 
 /* Change background color of buttons on hover */
-.playing-tab button:hover {
+.tab button:hover {
     color: lightgreen;
 }
 
 /* Create an active/current tablink class */
-.playing-tab button.active {
+.tab button.active {
     border-style: solid;
     border-left-color: lightgreen;
     border-top-color: lightgreen;
@@ -130,6 +134,10 @@ body {
     padding: 1vh 1vw 1.5vh 1vw;
     overflow: hidden;
     width: 43vw;
+}
+
+.secondTab {
+    border-color: deepskyblue;
 }
 
 .instructions {
@@ -281,3 +289,29 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     margin: 0;
 }
  
+
+table {
+    font-family: "Roboto";
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td, table th {
+    padding: 8px;
+}
+
+table tr:nth-child(odd) {
+    background-color: #00ade7;
+}
+
+table tr:nth-child(even) {
+    background-color: deepskyblue;
+}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4dd2ff;
+    color: white;
+}

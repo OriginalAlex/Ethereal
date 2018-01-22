@@ -30,96 +30,166 @@
                     <div id="description">Ethereal is a <i>provably fair</i> dice game requiring no identity verification<br>or other similar nuisances</div>
                 </div>
             </div>
-            <div class="left">
-                <div class="tab">
-                    <div class="playing-tab">
-                        <button class="tablinks" onclick="openTab(event, 'play')" id="default">Play</button>
-                        <button class="tablinks" onclick="openTab(event, 'outcomes')">Auto Bet</button>
-                        <button class="tablinks" onclick="openTab(event, 'instructions')">How to Play</button>
-                    </div>
-                    <div id="play" class="tabcontent">
-                        <div id="bet-content">
-                            <div class="left">
-                                <div id="size">
-                                    <h4>BET SIZE</h4>
-                                    <div class="top">
-                                        <div class="row">
-                                            <div class="col" onclick="setMaxOrMin(false)">MIN</div>
-                                            <div class="col" onclick="multiplyBet(0.5)">1/2</div>
-                                            <div class="col" onclick="multiplyBet(2)">2X</div>
-                                            <div class="col" onclick="setMaxOrMin(true)">MAX</div>
-                                        </div>
-                                    </div>
-                                    <div class="bottom">
-                                        <input class="numberBox" id="betsize" type="number" value="0.00010" step="0.0001"
-                                        ><div class="simple-box">PLAY</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="right">
-                                <h4>PROFIT ON WIN</h4>
-                                <div id="profit">
-                                    <div class="top">
-                                        <div class="row">
-                                            <div class="col" onclick="setMaxOrMin(false)">MIN</div>
-                                            <div class="col" onclick="multiplyProfit(0.5)">1/2</div>
-                                            <div class="col" onclick="multiplyProfit(2)">2X</div>
-                                            <div class="col" onclick="setMaxOrMin(true)">MAX</div>
-                                        </div>
-                                    </div>
-                                    <div class="bottom">
-                                        <input class="numberBox" id="payout" type="number" value="2" step="1"
-                                        ><div class="simple-box">X</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
-                            <div id="spacefiller"></div>
-                            <div id="info">
+            <div id="real-content">
+                <div class="left">
+                    <div class="betting-tab">
+                        <div class="tab">
+                            <button class="primaryLinks tablinks active" onclick="openTab(event, 'play', 'primaryTab', 'primaryLinks')" id="default">Play</button>
+                            <button class="primaryLinks tablinks" onclick="openTab(event, 'outcomes', 'primaryTab', 'primaryLinks')">Auto Bet</button>
+                            <button class="primaryLinks tablinks" onclick="openTab(event, 'instructions', 'primaryTab', 'primaryLinks')">How to Play</button>
+                        </div>
+                        <div id="play" class="primaryTab tabcontent" style="display: inline-block">
+                            <div id="bet-content">
                                 <div class="left">
                                     <div id="size">
-                                        <h4>Payout</h4>
+                                        <h4>BET SIZE</h4>
+                                        <div class="top">
+                                            <div class="row">
+                                                <div class="col" onclick="setMaxOrMin(false)">MIN</div>
+                                                <div class="col" onclick="multiplyBet(0.5)">1/2</div>
+                                                <div class="col" onclick="multiplyBet(2)">2X</div>
+                                                <div class="col" onclick="setMaxOrMin(true)">MAX</div>
+                                            </div>
+                                        </div>
                                         <div class="bottom">
-                                            <input class="numberBox" id="winAmount" type="number" value="0.00020"disabled
+                                            <input class="numberBox" id="betsize" type="number" value="0.00010" step="0.0001"
                                             ><div class="simple-box">PLAY</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="right">
-                                    <h4>Win Chance</h4>
+                                    <h4>PROFIT ON WIN</h4>
                                     <div id="profit">
+                                        <div class="top">
+                                            <div class="row">
+                                                <div class="col" onclick="setMaxOrMin(false)">MIN</div>
+                                                <div class="col" onclick="multiplyProfit(0.5)">1/2</div>
+                                                <div class="col" onclick="multiplyProfit(2)">2X</div>
+                                                <div class="col" onclick="setMaxOrMin(true)">MAX</div>
+                                            </div>
+                                        </div>
                                         <div class="bottom">
-                                            <input class="numberBox" id="winChance" type="number" value="49.50" step="1" disabled
-                                            ><div class="simple-box">%</div>
+                                            <input class="numberBox" id="payout" type="number" value="2" step="1"
+                                            ><div class="simple-box">X</div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>                      
-                        </div>
-                        <div class="clear"></div>
-                        <div id="spacefiller2"></div>
-                        <div id="rollContainer">
-                            <button id="rollUnder" class="left">ROLL UNDER<br><span id="under">49.5</span></button>
-                            <button id="rollOver" class="right">ROLL OVER<br><span id="over">50.49</span></button>
+                                <div class="clear"></div>
+                                <div id="spacefiller"></div>
+                                <div id="info">
+                                    <div class="left">
+                                        <div id="size">
+                                            <h4>Payout</h4>
+                                            <div class="bottom">
+                                                <input class="numberBox" id="winAmount" type="number" value="0.00020"disabled
+                                                ><div class="simple-box">PLAY</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h4>Win Chance</h4>
+                                        <div id="profit">
+                                            <div class="bottom">
+                                                <input class="numberBox" id="winChance" type="number" value="49.50" step="1" disabled
+                                                ><div class="simple-box">%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                      
+                            </div>
                             <div class="clear"></div>
+                            <div id="spacefiller2"></div>
+                            <div id="rollContainer">
+                                <button id="rollUnder" class="left">ROLL UNDER<br><span id="under">49.5</span></button>
+                                <button id="rollOver" class="right">ROLL OVER<br><span id="over">50.49</span></button>
+                                <div class="clear"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div id="outcomes" class="tabcontent">
-                        <h3>Outcomes</h3>
-                    </div>
-                    <div id="instructions" class="tabcontent">
-                        <h3>How to Play</h3>
-                    </div>
-                    <div id="support" class="tabcontent">
-                        <h3>How to Play</h3>
-                    </div>
-                    <div id="tandc" class="tabcontent">
-                        <h3>How to Play</h3>
+                        <div id="outcomes" class="primaryTab tabcontent">
+                            <h3>Outcomes</h3>
+                        </div>
+                        <div id="instructions" class="primaryTab tabcontent">
+                            <h3>How to Play</h3>
+                        </div>
+                        <div id="support" class="primaryTab tabcontent">
+                            <h3>How to Play</h3>
+                        </div>
+                        <div id="tandc" class="primaryTab tabcontent">
+                            <h3>How to Play</h3>
+                        </div>
                     </div>
                 </div>
                 <div class="right">
+                    <div class="results-tab-container" style="display: inline-block">
+                        <div class="tab">
+                            <button class="tablinks secondLinks active" onclick="openTab(event, 'yourBets', 'secondTab', 'secondLinks')" id="default">Your Bets</button>
+                            <button class="tablinks secondLinks" onclick="openTab(event, 'allBets', 'secondTab', 'secondLinks')">All Bets</button>
+                        </div>
+                        <div id="yourBets" class="tabcontent secondTab" style="display: inline-block; background-color: deepskyblue;">
+                            <table id="yourBets">
+                                <tr>
+                                    <th>Bet ID</th>
+                                    <th>Username</th>
+                                    <th>Amount</th>
+                                    <th>Payout</th>
+                                    <th>Target</th>
+                                    <th>Roll</th>
+                                    <th>Profit</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>AlexMaestro</td>
+                                    <td>0.0015</td>
+                                    <td>2</td>
+                                    <td>&lt; 49.5</td>
+                                    <td>39.65</td>
+                                    <td>0.003</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>AlexMaestro</td>
+                                    <td>0.0015</td>
+                                    <td>2</td>
+                                    <td>&lt; 49.5</td>
+                                    <td>39.65</td>
+                                    <td>0.003</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>AlexMaestro</td>
+                                    <td>0.0015</td>
+                                    <td>2</td>
+                                    <td>&lt; 49.5</td>
+                                    <td>39.65</td>
+                                    <td>0.003</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>AlexMaestro</td>
+                                    <td>0.0015</td>
+                                    <td>2</td>
+                                    <td>&lt; 49.5</td>
+                                    <td>39.65</td>
+                                    <td>0.003</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>AlexMaestro</td>
+                                    <td>0.0015</td>
+                                    <td>2</td>
+                                    <td>&lt; 49.5</td>
+                                    <td>39.65</td>
+                                    <td>0.003</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div id="allBets" class="tabcontent secondTab"></div>
+                    </div>
                 </div>
             </div>
         </div>
+        <button onclick="send()">Send</button>
+        <div class="clear"></div>
     </body>
 </html>

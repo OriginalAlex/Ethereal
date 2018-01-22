@@ -1,4 +1,4 @@
-var betsizeElem, payoutElem, winChanceElem, winAmountElem, betsize, payout, over, under; 
+var betsizeElem, payoutElem, winChanceElem, winAmountElem, betsize, payout, over, under, socket; 
 const edge = 0.01;
 
 function performHTTPRequest(method, url, data, callback) {
@@ -16,7 +16,7 @@ function performHTTPRequest(method, url, data, callback) {
 }
 
 function connectWebSocket() {
-    var socket = new WebSocket("ws://localhost:31416");
+    socket = new WebSocket("ws://localhost:31416");
     
     socket.onopen = function() {
         console.log("hi");
@@ -24,7 +24,13 @@ function connectWebSocket() {
     }
 }
 
+function send() {
+    socket.send("hi");
+    socket.send("test");
+}
+
 function roundToTwoDp(num) {
+    console.log(num);
     return Math.round(num*100) / 100;
 }
 
@@ -32,20 +38,20 @@ function roundToSixDp(num) {
     return Math.round(num*1000000) / 1000000;
 }
 
-function openTab(evt, tabname) {
+function openTab(evt, tabname, tabContentClassName, tabLinksClassName) {   
     var i, tabcontent, tablinks;
 
-    tabcontent = document.getElementsByClassName("tabcontent");
+    tabcontent = document.getElementsByClassName(tabContentClassName);
     for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
     }
 
-    tablinks = document.getElementsByClassName("tablinks");
+    tablinks = document.getElementsByClassName(tabLinksClassName);
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
 
-    document.getElementById(tabname).style.display = "block";
+    document.getElementById(tabname).style.display = "inline-block";
     evt.currentTarget.className += " active";
 }
 
@@ -56,27 +62,22 @@ function multiplyProfit(num) {
 }
 
 function update() {
-    var theoreticalChance = roundToTwoDp(1/payout),
+    var theoreticalChance = (1/payout),
         chance = theoreticalChance * (1-edge),
-        chancePercent = chance*100;
+        chancePercent = roundToTwoDp(chance*100);
     winChanceElem.value = chancePercent;
     winAmountElem.value = roundToSixDp(betsize*payout);
     under.innerHTML = chancePercent;
-    over.innerHTML = 99.99-chancePercent;    
+    over.innerHTML = roundToTwoDp(99.99-chancePercent);    
 }
 
-window.onload = function(e) {       
-    document.getElementById("play").style.display = "block";
-    document.getElementById("default").className += " active";
-    
+window.onload = function(e) {    
     betsizeElem = document.getElementById("betsize");
     payoutElem = document.getElementById("payout");
     winChanceElem = document.getElementById("winChance");
     winAmountElem = document.getElementById("winAmount");    
     over = document.getElementById("over");
     under = document.getElementById("under");
-    
-    console.log(payoutElem.value);
     
     betsizeElem.addEventListener("change", function(event) {
         betsize = betsizeElem.value;
