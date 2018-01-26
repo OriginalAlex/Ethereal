@@ -21,9 +21,9 @@ body {
 }
 
 .center {
-    width: 50vw;
-    margin-left: 25vw;
-    margin-right: 25vw;
+    width: 60vw;
+    margin-left: 20vw;
+    margin-right: 20vw;
 }
 
 .left {
@@ -133,7 +133,64 @@ body {
     background-color: #4dd2ff;
     padding: 1vh 1vw 1.5vh 1vw;
     overflow: hidden;
-    width: 43vw;
+}
+
+@media-screen and (max-width: 540px) {
+    #rollUnder {
+        margin-left: 5% !important;
+    }
+    #rollOver {
+        margin-right: 5% !important;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .tabcontent {
+        width: 43vw;
+    }
+}
+
+@media screen and (max-width: 999px) {
+    .tabcontent, #results {
+        width: 80vw;
+        float: none !important;
+        margin: 0 auto;
+    }
+    #rollUnder {
+        margin-left: 30% !important;
+    }
+    #rollOver {
+        margin-right: 30% !important;
+    }
+    .numberBox {
+        width: 70%;
+    }
+
+}
+
+@media screen and (max-width: 1400px) and (min-width: 1000px) {
+    #rollUnder {
+        margin-left: 15% !important;
+    }
+    #rollOver {
+        margin-right: 15% !important;
+    }
+}
+
+@media screen and (max-width: 1640px) {
+    #betSizeContainer, #profitContainer, #sizeInfoContainer, #winChanceContainer {
+        width: 95%;
+        float: none;
+    }
+    #seperator, #seperator2 {
+        height: 4vh;
+    }
+    #rollUnder {
+        margin-left: 24% !important;
+    }
+    #rollOver {
+        margin-right: 24% !important;
+    }
 }
 
 .secondTab {
@@ -176,15 +233,10 @@ h4 {
     clear: both;
 }
 
-/*
-I need:
-BetID, Better username, amount, payout, expected profit, roll, result (+/- expected profit)
-*/
-
 .simple-box {
     padding: 1.3vh 0.7vw 1.3vh 1vw;
     display: inline-block;
-    text-align: right;
+    text-align: center;
     color: floralwhite;
     font-size: 20px;
     background-color: deepskyblue;
@@ -206,6 +258,7 @@ BetID, Better username, amount, payout, expected profit, roll, result (+/- expec
 .row {
     background-color:#00A6E6;
     margin: 0;
+    width: 100%;
 }
 
 .col {
@@ -234,7 +287,7 @@ BetID, Better username, amount, payout, expected profit, roll, result (+/- expec
 }
 
 #rollContainer {
-    width: 45vw;
+    width: 100%;
     background-color: #4dd2ff;
     padding-top: 1.5vh;
     padding-bottom: 1.5vh;
@@ -255,11 +308,11 @@ BetID, Better username, amount, payout, expected profit, roll, result (+/- expec
 }
 
 #rollUnder {
-    margin-left: 11.2vw;
+    margin-left: 30%;
 }
 
 #rollOver {
-    margin-right: 12.8vw;
+    margin-right: 28%;
 }
 
 .part {
@@ -288,7 +341,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     -webkit-appearance: none;
     margin: 0;
 }
- 
+
+.tableContainer {
+    height: 40vh;
+    overflow-y: scroll;
+}
 
 table {
     font-family: "Roboto";
@@ -314,4 +371,39 @@ table th {
     text-align: left;
     background-color: #4dd2ff;
     color: white;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+::-webkit-scrollbar {
+  width: 8px; /* 1px wider than Lion. */
+  /* This is more usable for users trying to click it. */
+  background-color: rgba(0,0,0,0);
+  -webkit-border-radius: 100px;
+}
+/* hover effect for both scrollbar area, and scrollbar 'thumb' */
+::-webkit-scrollbar:hover {
+  background-color: rgba(0, 0, 0, 0.09);
+}
+
+/* The scrollbar 'thumb' ...that marque oval shape in a scrollbar */
+::-webkit-scrollbar-thumb:vertical {
+  /* This is the EXACT color of Mac OS scrollbars. 
+     Yes, I pulled out digital color meter */
+  background: rgba(0,0,0,0.5);
+  -webkit-border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:vertical:active {
+  background: rgba(0,0,0,0.61); /* Some darker color when you click it */
+  -webkit-border-radius: 100px;
+}
+
+#autoBet {
+    text-align: center;
 }
